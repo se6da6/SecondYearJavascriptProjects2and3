@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Poppins Regular';
+    src: url('./font/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body
+{
+    padding-top: 5em;
+    background-color: #FCF6EA;
+    color: #343440;
+    font-family: 'Poppins Regular';
+}
+
+select
+{
+    background-color: #ffffff;
+    display: inline;
+    margin-right: 1em;
+    font-family: 'Poppins Regular';
+}
+
+.listbox-list
+{
+    margin-right: 2em;
+}
+
+.listbox-list
+{
+    display: inline;
+}
+
+.applyBtn
+{
+    margin-right: 1em;
+}
+
+table
+{
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    border: none;
+    border-collapse: collapse;
+    min-width: 80em;
+}
+
+th
+{
+    text-align: left;
+}
+
+td, th{
+    padding: 0.5em;
+}
+
+table tr:nth-child(even) {
+    background-color: #d7cbb9;
+    }
+
+.previousBtn
+{
+    margin-right: 87.5em;
+}
+
+button
+{
+    background-color: #c8bcb8;
+    border: none;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    font-family: 'Poppins Regular';
+}
+
+button:hover
+{
+    background-color: #ab9a96;
+}

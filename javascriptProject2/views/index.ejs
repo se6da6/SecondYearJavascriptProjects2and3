@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> <%= title %> </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Airbnb Search App</h1>
+    <p>Seda Dadak</p>
+
+    <div class="border p-5 bg-light col-6">
+      <h1>One listing</h1>     
+      <form action="/airbnb/find-one">
+        <label for="bedrooms">Minimum number of bedrooms</label>
+        <input type="text" id="bedrooms" name="bedrooms" value="1"><br><br>
+        <label>Maximum Number of Guests</label>
+        <input type="text" id="guestNumber" name="guests"><br><br>
+        <label>Maximum Price per Night</label>
+        <input type="text" id="priceNight" name="priceNight"><br><br>
+        <h2>Amenities</h2>
+            <input type="checkbox" name="amenities[]" id="wifi" value="49fcaedc-481a-4e05-934f-4867988c8ec5">
+            <label for="wifi">Wireless Internet</label><br>
+            <input type="checkbox" name="amenities[]" id="pool" value="f4e98f0a-053a-42e2-9633-0cca2a587410">
+            <label for="pool">Pool</label><br>
+            <input type="checkbox" name="amenities[]" id="breakfast" value="9c54e3ed-48b3-4438-bb2c-304e14a9bde4">
+            <label for="breakfast">Breakfast</label><br>
+            <input type="checkbox" name="amenities[]" id="gym" value="416cddd7-746e-4715-821c-3ad30b9bc3c3">
+            <label for="breakfast">Gym</label><br>
+            <input type="checkbox" name="amenities[]" id="washer" value="6dd36c9f-9863-4850-a810-a7629fe07d72">
+            <label for="breakfast">Washer</label><br>
+            <input type="checkbox" name="amenities[]" id="lockbox" value="0d375b05-5ef9-4d43-aaca-436762bb25bf">
+            <label for="breakfast">Lockbox</label><br>
+        <br><br>
+        <input type="submit" value="Send Query">
+      </form>
+    </div>
+
+    <div class="border p-5 mt-5 bg-light col-6">
+      <h1>Many listings</h1>
+      <form action="/airbnb/find-many">
+        <p><label for="bedrooms">Minimum number of bedrooms</label>
+        <input type="text" id="bedrooms" name="bedrooms">
+        </p>
+        <p><select id="states" name="state">
+          <option value="">--Select a state--</option><br><br>
+        </select></p>
+        <p><select id="cities" name="city">
+          <option value="">--Select a city--</option><br><br>
+        </select></p>
+        <p><input type="submit" value="Send Query"></p>
+        
+      </form>
+    </div>
+    <script type="text/javascript">
+      let statesList = document.getElementById("states");
+      fetch("./states")
+      .then(response=>response.json())
+      .then(data=>{
+        for(let i = 0; i<data.length;i++)
+        {
+          statesList.innerHTML += 
+          `<option value="${data[i].id}">
+              ${data[i].name}
+          </option>` }
+      });
+      statesList.addEventListener("change", event=>{
+
+        let selectedStateIndex = statesList.selectedIndex;
+        let currentState = statesList[statesList.selectedIndex];
+        let currentStateId = currentState.value;
+        let urlToCall = `./cities?states=${currentStateId}`;
+        let cityDropDown = document.getElementById("cities");
+        fetch(urlToCall)
+        .then(response=>response.json())
+        .then(data=>{
+          
+          cityDropDown.innerHTML="<option value=''>--Select a city--</option>"
+          for(let i =0; i< data.length; i++)
+          {
+            
+            cityDropDown.innerHTML +=
+            `<option value ="${data[i].id}">
+              ${data[i].name}
+            </option>`
+          }
+           
+
+        });
+      });
+
+       
+    </script>
+  </body>
+</html>
